@@ -7,8 +7,6 @@ distutils/setuptools install script. See inline comments for packaging documenta
 import os
 import sys
 
-import seesaw
-
 try:
   from setuptools import setup
   # hush pyflakes
