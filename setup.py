@@ -42,7 +42,7 @@ setup(
   package_data=package_data,
   include_package_data=True,
   scripts=scripts,
-  install_requires=[],
+  install_requires=['argparse'],
   cmdclass={'build_py': build_py}
 )
 
