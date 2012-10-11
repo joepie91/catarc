@@ -66,9 +66,16 @@ if options['size'] is not None:
 
 # Select all files matching the given pattern
 file_list = options['pattern']
+failed = 0
 
 for item in file_list:
-	data = os.stat(item)
+	try:
+		data = os.stat(item)
+	except OSError:
+		sys.stderr.write("WARNING: Could not stat %s - it probably doesn't exist.\n" % item)
+		failed += 1
+		continue
+	
 	filesize = data.st_size
 	
 	try:
@@ -116,6 +123,7 @@ for item in file_list:
 			returncode = subprocess.call(['unzip', '-p', item], stderr=stfu)
 		else:
 			sys.stderr.write("WARNING: Skipping item %s, not a recognized archive type\n" % item)
+			failed += 1
 			continue
 	
 	if returncode == 0:
@@ -124,3 +132,7 @@ for item in file_list:
 		sys.stderr.write("ERROR: Could not run the needed command - are you sure you have %s installed?\n" % processor)
 	else:
 		sys.stderr.write("ERROR: Failed to output %s\n" % item)
+
+if failed >= len(file_list):
+	sys.stderr.write("Nothing to process.\n")
+	exit_script()
