@@ -32,7 +32,7 @@ scripts = [
 
 setup(
   name='catarc',
-  version='1.0',
+  version='1.1',
   maintainer='Sven Slootweg',
   maintainer_email='admin@cryto.net',
   description='Tool to output uncompressed contents of (multiple) archives to stdout, without writing to disk',
