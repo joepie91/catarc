@@ -112,12 +112,18 @@ for item in file_list:
 		elif item.endswith(".tar.bz2"):
 			processor = "tar/bzip2"
 			returncode = subprocess.call(['tar', '-Oxjf', item], stderr=stfu)
+		elif item.endswith(".tar.xz"):
+			processor = "tar/xz"
+			returncode = subprocess.call(['tar', '-OxJf', item], stderr=stfu)
 		elif item.endswith(".gz"):
 			processor = "gzip"
 			returncode = subprocess.call(['gzip', '-cd', item], stderr=stfu)
 		elif item.endswith(".bz2"):
 			processor = "bzip2"
 			returncode = subprocess.call(['bzip2', '-cd', item], stderr=stfu)
+		elif item.endswith(".xz"):
+			processor = "xz"
+			returncode = subprocess.call(['xz', '-cd', item], stderr=stfu)
 		elif item.endswith(".zip"):
 			processor = "unzip"
 			returncode = subprocess.call(['unzip', '-p', item], stderr=stfu)
